@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-
+# Load model and scaler with error handling
 try:
     model = joblib.load("best_model2.pkl")
     scaler = joblib.load("scaler.pkl")
@@ -14,7 +14,7 @@ st.title("Football Predictions")
 
 def features():
     attribute1 = st.number_input("Player's Movement Reaction")
-    attribute2 = st.number_input("PLayer's Potential")
+    attribute2 = st.number_input("Player's Potential")
     attribute3 = st.number_input("Player's Wage in Euros")
     attribute4 = st.number_input("Player's Value in Euros")
     attribute5 = st.number_input("Player's Passing")
@@ -57,14 +57,15 @@ def features():
         'skill_fk_accuracy': attribute20
     }
 
-    df = pd.DataFrame(dict, index = [0])
+    df = pd.DataFrame(dict, index=[0])
     return df
 
+input_data = features()
 
 try:
-    scaledinput = scaler.transform(input)
+    scaled_input = scaler.transform(input_data)
 
-    prediction = model.predict(scaledinput)
+    prediction = model.predict(scaled_input)
 
     st.subheader('Prediction')
     st.write(f'Predicted Rating: {prediction[0]}')
