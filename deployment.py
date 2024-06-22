@@ -3,9 +3,12 @@ import joblib
 import pandas as pd
 
 
-model = joblib.load("best_model2.pkl")
-
-scaler = joblib.load("scaler.pkl")
+try:
+    model = joblib.load("best_model2.pkl")
+    scaler = joblib.load("scaler.pkl")
+except Exception as e:
+    st.error(f"Error loading model or scaler: {e}")
+    st.stop()
 
 st.title("Football Predictions")
 
