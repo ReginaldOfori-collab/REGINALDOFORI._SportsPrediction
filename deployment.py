@@ -1,11 +1,16 @@
 import streamlit as st
-import joblib
+import pickle
 import pandas as pd
 
 
-model = joblib.load("best_model2.pkl")
-
-scaler = joblib.load("scaler.pkl")
+try:
+    with open('best_model2.pkl', 'rb') as model_file:
+        model = pickle.load(model_file)
+    with open('scaler.pkl', 'rb') as scaler_file:
+        scaler = pickle.load(scaler_file)
+except Exception as e:
+    st.error(f"Error loading model or scaler: {e}")
+    st.stop()
 
 st.title("Football Predictions")
 
