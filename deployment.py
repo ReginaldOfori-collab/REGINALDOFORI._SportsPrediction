@@ -1,11 +1,13 @@
 import streamlit as st
-import joblib
+import pickle
 import pandas as pd
 
 # Load model and scaler with error handling
 try:
-    model = joblib.load("best_model2.pkl")
-    scaler = joblib.load("scaler.pkl")
+    with open('best_model2.pkl', 'rb') as model_file:
+        model = pickle.load(model_file)
+    with open('scaler.pkl', 'rb') as scaler_file:
+        scaler = pickle.load(scaler_file)
 except Exception as e:
     st.error(f"Error loading model or scaler: {e}")
     st.stop()
@@ -34,7 +36,7 @@ def features():
     attribute19 = st.number_input("Player's Attacking Crossing")
     attribute20 = st.number_input("Player's Skill Freekick Accuracy")
 
-    dict = {
+    data = {
         'movement_reactions': attribute1,
         'potential': attribute2,
         'wage_eur': attribute3,
@@ -57,7 +59,7 @@ def features():
         'skill_fk_accuracy': attribute20
     }
 
-    df = pd.DataFrame(dict, index=[0])
+    df = pd.DataFrame(data, index=[0])
     return df
 
 input_data = features()
