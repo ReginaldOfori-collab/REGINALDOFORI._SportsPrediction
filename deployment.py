@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-# Load model and scaler with error handling
+
 try:
     with open('best_model2.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
