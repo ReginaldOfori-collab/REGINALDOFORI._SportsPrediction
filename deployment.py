@@ -4,9 +4,9 @@ import pandas as pd
 
 # Load model and scaler with error handling
 try:
-    with open("best_model2.pkl", "rb") as model_file:
+    with open('best_model2.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
-    with open("scaler.pkl", "rb") as scaler_file:
+    with open('scaler.pkl', 'rb') as scaler_file:
         scaler = pickle.load(scaler_file)
 except Exception as e:
     st.error(f"Error loading model or scaler: {e}")
